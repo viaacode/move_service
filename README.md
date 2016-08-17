@@ -23,3 +23,19 @@ Its location can also be set with the '-p' parameter. For example:
 ```
 java -jar move-service.jar -p /etc/delete.d/application.properties
 ```
+
+# Example
+
+Request:
+
+```json
+{
+  "file_name": "test.xml",
+  "file_source_path": "/home/sourcepath",
+  "file_destination_path": "/home/destinationpath",
+  "host": "host.be",
+  "username": "username",
+  "password": "password",
+  "correlation_id": "some_id"
+}
+```
