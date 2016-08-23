@@ -24,7 +24,9 @@ Its location can also be set with the '-p' parameter. For example:
 java -jar move-service.jar -p /etc/delete.d/application.properties
 ```
 
-# Example
+Copy the application.properties.example to application.properties
+
+# Example Request
 
 Request:
 
