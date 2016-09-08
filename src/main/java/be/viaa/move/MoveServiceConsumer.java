@@ -1,5 +1,8 @@
 package be.viaa.move;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import be.viaa.amqp.AmqpJsonConsumer;
 import be.viaa.amqp.AmqpService;
 import be.viaa.fxp.File;
@@ -18,6 +21,11 @@ import be.viaa.util.GsonUtil;
 public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 
 	/**
+	 * The logger for this class
+	 */
+	private static final Logger logger = LogManager.getLogger(MoveServiceConsumer.class);
+
+	/**
 	 * The file transporter
 	 */
 	private final FxpFileTransporter transporter = new FxpFileTransporter();
@@ -34,6 +42,7 @@ public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 		File sourceFile = new File(message.getSourcePath(), message.getFilename());
 		File destinationFile = new File(message.getDestinationPath(), message.getFilename());
 		Host host = new Host(message.getHost(), message.getUsername(), message.getPassword());
+		
 		
 		transporter.move(sourceFile, destinationFile, host);
 	}
@@ -65,10 +74,11 @@ public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 		try {
 			service.write("move_responses", GsonUtil.convert(response));
 		} catch (Exception ex) {
-			// TODO: This exception needs to be monitored closely and logged pretty well, it means the queue
-			// TODO: is unreachable and this needs to be reported to inform that the RabbitMQ is down
-			ex.printStackTrace();
+			logger.warn("Could not write to the response queue");
+			logger.catching(ex);
 		}
+		
+		logger.catching(exception);
 	}	
 
 }

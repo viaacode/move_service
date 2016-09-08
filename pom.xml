@@ -27,7 +27,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>be.viaa.Application</mainClass>
+							<mainClass>be.viaa.move.MoveApplication</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

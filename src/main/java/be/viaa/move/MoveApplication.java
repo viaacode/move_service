@@ -1,4 +1,4 @@
-package be.viaa;
+package be.viaa.move;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import be.viaa.amqp.AmqpBatchService;
 import be.viaa.amqp.AmqpService;
 import be.viaa.amqp.rabbitmq.RabbitMQService;
-import be.viaa.move.MoveServiceConsumer;
 
 /**
  * Contains the entry point of the application
@@ -19,12 +18,12 @@ import be.viaa.move.MoveServiceConsumer;
  * @author Hannes Lowette
  *
  */
-public class Application {
+public class MoveApplication {
 	
 	/**
 	 * The logger class for this application
 	 */
-	private static final Logger logger = LogManager.getLogger(Application.class);
+	private static final Logger logger = LogManager.getLogger(MoveApplication.class);
 
 	/**
 	 * 
@@ -53,13 +52,13 @@ public class Application {
 		
 		try {
 			AmqpService service = new RabbitMQService(host, username, password);
-			AmqpBatchService poller = new AmqpBatchService(service);
+			AmqpBatchService batch = new AmqpBatchService(service);
 
 			service.createIfNotExists("move_requests");
 			service.createIfNotExists("move_responses");
 			
-			poller.addListener("move_requests", new MoveServiceConsumer());
-			poller.start();
+			batch.addListener("move_requests", new MoveServiceConsumer());
+			batch.start();
 		} catch (Exception ex) {
 			logger.fatal("Could not connect to the MQ server: " + ex.getMessage());
 			logger.catching(ex);
