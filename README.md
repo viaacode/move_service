@@ -32,9 +32,10 @@ Request:
 
 ```json
 {
-  "file_name": "test.xml",
-  "file_source_path": "/home/sourcepath",
-  "file_destination_path": "/home/destinationpath",
+  "source_name": "source.xml",
+  "destination_name": "destination.xml",
+  "source_path": "/home/sourcepath",
+  "destination_path": "/home/destinationpath",
   "host": "host.be",
   "username": "username",
   "password": "password",

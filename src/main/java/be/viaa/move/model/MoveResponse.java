@@ -17,21 +17,27 @@ import com.google.gson.annotations.SerializedName;
 public class MoveResponse {
 	
 	/**
-	 * The filename of the deleted file
+	 * The filename of the deleted source file
 	 */
-	@SerializedName("file_name")
-	private String filename;
+	@SerializedName("source_filename")
+	private String source_filename;
 	
+        /**
+	 * The filename of the destination file
+	 */
+	@SerializedName("destination_filename")
+	private String destination_filename;
+        
 	/**
 	 * The directory of the file
 	 */
-	@SerializedName("file_source_path")
+	@SerializedName("source_path")
 	private String sourceDirectory;
 	
 	/**
 	 * The directory of the file
 	 */
-	@SerializedName("file_destination_path")
+	@SerializedName("destination_path")
 	private String destinationDirectory;
 	
 	/**
@@ -75,17 +81,31 @@ public class MoveResponse {
 	}
 
 	/**
-	 * @return the filename
+	 * @return the source filename
 	 */
-	public String getFilename() {
-		return filename;
+	public String getSourceFilename() {
+		return source_filename;
 	}
 
 	/**
-	 * @param filename the filename to set
+	 * @param filename the source filename to set
 	 */
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setSourceFilename(String filename) {
+		this.source_filename = filename;
+	}
+        
+        /**
+	 * @return the source filename
+	 */
+	public String getDestinationFilename() {
+		return destination_filename;
+	}
+
+	/**
+	 * @param filename the destination filename to set
+	 */
+	public void setDestinationFilename(String filename) {
+		this.destination_filename = filename;
 	}
 
 	/**

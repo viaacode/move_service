@@ -13,7 +13,7 @@ import be.viaa.move.model.MoveResponse;
 import be.viaa.util.GsonUtil;
 
 /**
- * AMQP consumer for FXP messages
+ * AMQP consumer for Move messages
  * 
  * @author Hannes Lowette
  *
@@ -39,8 +39,8 @@ public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 
 	@Override
 	public void accept(AmqpService service, MoveRequest message) throws Exception {
-		File sourceFile = new File(message.getSourcePath(), message.getFilename());
-		File destinationFile = new File(message.getDestinationPath(), message.getFilename());
+		File sourceFile = new File(message.getSourcePath(), message.getSourceFilename());
+		File destinationFile = new File(message.getDestinationPath(), message.getDestinationName());
 		Host host = new Host(message.getHost(), message.getUsername(), message.getPassword());
 		
 		
@@ -51,7 +51,8 @@ public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 	public void success(AmqpService service, MoveRequest request) throws Exception {
 		MoveResponse response = new MoveResponse();
 		
-		response.setFilename(request.getFilename());
+		response.setSourceFilename(request.getSourceFilename());
+                response.setDestinationFilename(request.getDestinationName());
 		response.setSourceDirectory(request.getSourcePath());
 		response.setDestinationDirectory(request.getDestinationPath());
 		response.setStatus("OK");
@@ -64,7 +65,8 @@ public class MoveServiceConsumer extends AmqpJsonConsumer<MoveRequest> {
 	public void exception(AmqpService service, Exception exception, MoveRequest request) {
 		MoveResponse response = new MoveResponse();
 
-		response.setFilename(request.getFilename());
+		response.setSourceFilename(request.getSourceFilename());
+                response.setDestinationFilename(request.getDestinationName());
 		response.setSourceDirectory(request.getSourcePath());
 		response.setDestinationDirectory(request.getDestinationPath());
 		response.setStatus("NOK");
