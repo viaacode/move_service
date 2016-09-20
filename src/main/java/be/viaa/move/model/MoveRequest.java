@@ -11,22 +11,28 @@ import com.google.gson.annotations.SerializedName;
 public class MoveRequest {
 
 	/**
-	 * The name of the file
+	 * The name of the source file
 	 */
-	@SerializedName("file_name")
-	private String filename;
+	@SerializedName("source_name")
+	private String source_name;
+        
+        /**
+	 * The name of the destination file
+	 */
+	@SerializedName("destination_name")
+	private String destination_name;
 	
 	/**
-	 * The directory the file is located in
+	 * The directory the source file is located in
 	 */
-	@SerializedName("file_source_path")
-	private String sourcePath;
+	@SerializedName("source_path")
+	private String source_path;
 	
 	/**
-	 * The directory the file is located in
+	 * The destination directory
 	 */
-	@SerializedName("file_destination_path")
-	private String destinationPath;
+	@SerializedName("destination_path")
+	private String destination_path;
 
 	/**
 	 * The remote location of the FTP server
@@ -50,17 +56,31 @@ public class MoveRequest {
 	private String correlationId;
 
 	/**
-	 * @return the filename
+	 * @return the source filename
 	 */
-	public String getFilename() {
-		return filename;
+	public String getSourceFilename() {
+		return source_name;
 	}
 
 	/**
-	 * @param filename the filename to set
+	 * @param filename the source filename to set
 	 */
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setSourceFilename(String filename) {
+		this.source_name = filename;
+	}
+        
+        /**
+	 * @return the destination filename
+	 */
+	public String getDestinationName() {
+		return destination_name;
+	}
+
+	/**
+	 * @param filename the destination filename to set
+	 */
+	public void setDestinationName(String filename) {
+		this.destination_name = filename;
 	}
 
 	/**
@@ -123,28 +143,28 @@ public class MoveRequest {
 	 * @return the sourcePath
 	 */
 	public String getSourcePath() {
-		return sourcePath;
+		return source_path;
 	}
 
 	/**
 	 * @param sourcePath the sourcePath to set
 	 */
 	public void setSourcePath(String sourcePath) {
-		this.sourcePath = sourcePath;
+		this.source_path = sourcePath;
 	}
 
 	/**
 	 * @return the destinationPath
 	 */
 	public String getDestinationPath() {
-		return destinationPath;
+		return destination_path;
 	}
 
 	/**
 	 * @param destinationPath the destinationPath to set
 	 */
 	public void setDestinationPath(String destinationPath) {
-		this.destinationPath = destinationPath;
+		this.destination_path = destinationPath;
 	}
 
 }
