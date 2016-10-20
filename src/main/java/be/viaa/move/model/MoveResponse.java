@@ -15,6 +15,11 @@ import com.google.gson.annotations.SerializedName;
  *
  */
 public class MoveResponse {
+
+	/**
+	 * The format in which the timestamp is shown
+	 */
+	public static final String TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss,SSS";
 	
 	/**
 	 * The filename of the deleted source file
@@ -50,6 +55,11 @@ public class MoveResponse {
 	 * The status of the deletion (OK/NOK)
 	 */
 	private String status;
+
+	/**
+	 * The timestamp at which the response is created
+	 */
+	private String timestamp;
 	
 	/**
 	 * Collection of exceptions
@@ -169,6 +179,20 @@ public class MoveResponse {
 	 */
 	public List<String> getMessages() {
 		return messages;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }
