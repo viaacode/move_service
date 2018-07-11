@@ -2,17 +2,19 @@
 Microservice to move a file from the same server, triggered with RabbitMQ messages
 
 # Maven 
-First install the [FXP service](https://github.com/viaacode/fxp_service) using maven install in the FXP service directory
-```
-mvn install
-```
+This service depends on the FXP service [FXP service](https://github.com/viaacode/fxp_service), thus the VIAA nexus repo should be configured correctly.
+
 Then you can compile or build the move service regularly with a Maven command of you choice (package, compile, ...) like you normally would.
 
-There is also an option to compile as a fat JAR (a JAR file with all of its dependencies packaged inside)
+`mvn package` creates the same 'fat' jar as `mvn clean compile assembly:single`. Build the project using one of the two following:
 
-```
-mvn clean compile assembly:single
-```
+- `mvn clean compile assembly:single`
+- `mvn clean package`
+
+Once built, the artifact can be deployed to the nexus, assuming credentials for the VIAA repo are set up correctly:
+- `mvn deploy`
+
+Consult the [`mvn deploy`](https://maven.apache.org/plugins/maven-deploy-plugin/usage.html) documentation.
 
 # Properties File
 
